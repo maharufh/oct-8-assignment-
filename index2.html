@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>
+        Take and example create prototype object and do object
+         modification access variable and methods by inheriting
+    
+       </h2>
+       <script>
+           // Base prototype object 'Vehicle'
+function Vehicle(type, brand) {
+    this.type = type;  // e.g., 'Car', 'Bike'
+    this.brand = brand;  // e.g., 'Tesla', 'BMW'
+}
+
+// Adding a method to the Vehicle prototype
+Vehicle.prototype.getInfo = function() {
+    return `Vehicle Type: ${this.type}, Brand: ${this.brand}`;
+};
+
+// New object 'Car' inheriting from 'Vehicle'
+function Car(brand, model, year) {
+    // Call the Vehicle constructor using 'this'
+    Vehicle.call(this, "Car", brand);  // The type is always 'Car'
+    this.model = model;  // e.g., 'Model S'
+    this.year = year;  // e.g., '2020'
+}
+
+// Inherit the Vehicle prototype in Car
+Car.prototype = Object.create(Vehicle.prototype);
+
+// Add a new method specific to Car
+Car.prototype.getCarDetails = function() {
+    return `${this.getInfo()}, Model: ${this.model}, Year: ${this.year}`;
+};
+ // Create an instance of Car
+const myCar = new Car("Tesla", "Model S", 2020);
+
+// Access inherited and own properties and methods
+console.log(myCar.type);  // Output: Car (inherited from Vehicle)
+console.log(myCar.brand);  // Output: Tesla (inherited from Vehicle)
+console.log(myCar.model);  // Output: Model S
+console.log(myCar.year);  // Output: 2020
+
+// Access inherited method from Vehicle
+console.log(myCar.getInfo());  // Output: Vehicle Type: Car, Brand: Tesla
+
+// Access method from Car prototype
+console.log(myCar.getCarDetails());  
+// Output: Vehicle Type: Car, Brand: Tesla, Model: Model S, Year: 2020
+
+       </script>
+</body>
+</html>
