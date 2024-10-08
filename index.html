@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h2>
+    Take and example create prototype object and do object
+     modification access variable and methods by inheriting
+
+   </h2>
+
+   <script>
+       // Base prototype object 'Building'
+function Building(name, location) {
+    this.name = name;
+    this.location = location;
+}
+
+// Adding a method to the Building prototype
+Building.prototype.getInfo = function() {
+    return `Building: ${this.name}, Location: ${this.location}`;
+};
+
+// Create a new object 'ResidentialBuilding' that inherits from 'Building'
+function ResidentialBuilding(name, location, numberOfFloors) {
+    // Call the parent constructor (Building) with this object's context
+    Building.call(this, name, location);
+    this.numberOfFloors = numberOfFloors;
+}
+
+// Inherit the prototype of Building
+ResidentialBuilding.prototype = Object.create(Building.prototype);
+
+// Define a new method for ResidentialBuilding
+ResidentialBuilding.prototype.getDetails = function() {
+    return `${this.getInfo()}, Floors: ${this.numberOfFloors}`;
+};
+ // Create an instance of ResidentialBuilding
+const building1 = new ResidentialBuilding("22 Bishopsgate", "London", 62);
+
+// Access properties and methods
+console.log(building1.name);  
+console.log(building1.location);  
+console.log(building1.getInfo());   
+console.log(building1.getDetails());  
+
+// Modify the property
+building1.numberOfFloors = 64;
+console.log(building1.getDetails());   
+
+   </script>
+</body>
+</html>
